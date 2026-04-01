@@ -175,6 +175,7 @@ kbd {
 .feature-card,
 .doc-card,
 .playground-panel {
+  min-width: 0;
   background: rgba(255, 253, 249, 0.92);
   border: 1px solid rgba(23, 17, 15, 0.08);
   box-shadow: var(--chai-shadow);
@@ -246,6 +247,7 @@ kbd {
 
 .hero-side pre,
 .code-block {
+  max-width: 100%;
   margin: 0;
   overflow: auto;
   border-radius: var(--radius-md);
@@ -254,6 +256,13 @@ kbd {
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: #fff2dd;
   font-size: 0.92rem;
+}
+
+.hero-side pre code,
+.code-block code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .section {
