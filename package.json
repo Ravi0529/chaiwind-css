@@ -1,0 +1,26 @@
+{
+  "name": "chaiwind-css",
+  "version": "1.0.1",
+  "description": "Brew your UI styles instantly with utility classes, no build step needed.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ravi0529/chaiwind-css.git"
+  },
+  "keywords": [
+    "css",
+    "tailwind",
+    "utility-css",
+    "chaiwind"
+  ],
+  "author": "Ravi Mistry",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Ravi0529/chaiwind-css/issues"
+  },
+  "homepage": "https://github.com/Ravi0529/chaiwind-css#readme"
+}
