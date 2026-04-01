@@ -1,55 +1,70 @@
-# ChaiWindCSS
+# Pour-Chaiwind
 
-ChaiWindCSS is a lightweight runtime utility-CSS engine inspired by Tailwind-style workflows.
+`pour-chaiwind` is a lightweight runtime utility CSS engine for the browser.
 
-It scans your DOM for classes with a configurable prefix, resolves them into inline styles, and applies them directly in the browser with no build step required.
+It lets you write Tailwind-like utility classes such as `chai-p-20`, `chai-bg-blue-500`, and `chai-flex` directly in your HTML or JSX, then converts them into inline styles at runtime. No build step is required.
 
-## Why ChaiWindCSS
+## What This Package Provides
 
-- No compilation step
-- Utility-first workflow
-- Browser-based runtime engine
-- Static utilities plus dynamic value utilities
-- Built-in color palette support
-- MutationObserver support for dynamically added elements
-- Configurable class prefix
+- Utility-first styling with the default `chai-` prefix
+- Static utility classes for layout, spacing, typography, borders, effects, and more
+- Dynamic utility classes like `chai-p-20`, `chai-w-320`, `chai-gap-16`, `chai-grid-cols-3`
+- Built-in color palette support such as `chai-bg-blue-500`, `chai-text-slate-700`, `chai-border-rose-300`
+- Semantic colors like `chai-bg-semantic-primary`
+- Automatic processing of dynamically inserted DOM nodes through `MutationObserver`
+- A JavaScript API for manual initialization and cleanup
 
-## Features
+## How It Works
 
-- Static utility classes such as `chai-flex`, `chai-text-2xl`, `chai-shadow-md`, `chai-rounded-xl`
-- Dynamic utilities such as `chai-p-24`, `chai-px-16`, `chai-w-320`, `chai-grid-cols-3`
-- Palette-powered color utilities such as `chai-bg-blue-500`, `chai-text-slate-700`, `chai-border-emerald-300`
-- Semantic tokens such as `chai-bg-semantic-primary` and `chai-border-semantic-danger`
-- Automatic processing of newly inserted DOM elements through `MutationObserver`
-- Optional custom prefix support through the engine constructor
+ChaiWind scans the DOM for classes starting with `chai-`, resolves them to CSS declarations, applies them as inline styles, and removes the processed utility classes.
+
+Example:
+
+```html
+<div class="chai-bg-blue-500 chai-text-white chai-p-20 chai-rounded-xl">
+  Hello ChaiWind
+</div>
+```
+
+becomes:
+
+```html
+<div
+  style="background-color: #3b82f6; color: #ffffff; padding: 20px; border-radius: 12px;"
+>
+  Hello ChaiWind
+</div>
+```
 
 ## Installation
 
 ```bash
-npm install chaiwind-css
+npm install pour-chaiwind
 ```
 
-## How It Works
+## Package Entry
 
-ChaiWindCSS looks for classes beginning with the default prefix `chai-`.
+The package entry is:
 
-For example:
+```js
+import ChaiWindCSS from "pour-chaiwind";
+```
+
+You can also import the helper:
+
+```js
+import { pour } from "pour-chaiwind";
+```
+
+## Usage Without Installing: CDN `<script>`
+
+If you want to use the package directly in a plain HTML file without installing it, load the built bundle from jsDelivr:
 
 ```html
-<div class="chai-p-20 chai-bg-blue-500 chai-rounded-lg"></div>
+<script src="https://cdn.jsdelivr.net/npm/pour-chaiwind@latest/dist/chaiwind.min.js"></script>
 ```
 
-becomes inline styles at runtime:
-
-```html
-<div
-  style="padding: 20px; background-color: #3b82f6; border-radius: 8px;"
-></div>
-```
-
-## Quick Start
-
-### Browser / Vanilla JS
+Then write your HTML with `chai-` classes:
 
 ```html
 <!DOCTYPE html>
@@ -57,241 +72,224 @@ becomes inline styles at runtime:
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChaiWindCSS Demo</title>
+    <title>ChaiWind CDN Demo</title>
   </head>
   <body>
-    <div class="chai-p-24 chai-bg-blue-500 chai-text-white chai-rounded-xl">
-      Hello from ChaiWindCSS
+    <div class="chai-bg-blue-500 chai-text-white chai-p-20 chai-rounded-xl">
+      CDN test
     </div>
 
-    <script
-      type="module"
-      src="./node_modules/chaiwind-css/src/index.js"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/pour-chaiwind@latest/dist/chaiwind.min.js"></script>
   </body>
 </html>
 ```
 
-If you are testing locally, run the page through a local server instead of opening it directly with `file://`.
+### Global Object in CDN Mode
 
-### With a bundler
+The bundle exposes `Chaiwind` on `window`.
+
+If needed, you can manually initialize it:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/pour-chaiwind@latest/dist/chaiwind.min.js"></script>
+<script>
+  const engine = new Chaiwind();
+  engine.init();
+</script>
+```
+
+In normal usage, the bundle auto-initializes on `DOMContentLoaded`.
+
+## Usage After Installing
+
+### Vanilla JavaScript
 
 ```js
-import ChaiWindCSS from "chaiwind-css";
+import ChaiWindCSS from "pour-chaiwind";
 
 const chaiwind = new ChaiWindCSS();
 chaiwind.init();
 ```
 
-You can also use the helper export:
+### With the helper function
 
 ```js
-import { pour } from "chaiwind-css";
+import { pour } from "pour-chaiwind";
 
 pour();
 ```
 
-## Usage Examples
-
-### Basic card
-
-```html
-<section
-  class="chai-bg-white chai-rounded-3xl chai-shadow-lg chai-p-24 chai-mx-auto chai-max-w-420"
->
-  <h1 class="chai-text-3xl chai-font-bold chai-text-slate-800">Welcome</h1>
-  <p class="chai-text-slate-600 chai-leading-relaxed chai-mt-12">
-    Build layouts with utility classes and no build step.
-  </p>
-</section>
-```
-
-### Flex layout
+### Example HTML after installing
 
 ```html
 <div
-  class="chai-flex chai-items-center chai-justify-between chai-gap-16 chai-p-20 chai-bg-slate-100 chai-rounded-xl"
+  class="chai-flex chai-items-center chai-gap-12 chai-p-16 chai-bg-slate-100 chai-rounded-lg"
 >
-  <span class="chai-text-lg chai-font-semibold">ChaiWindCSS</span>
-  <button
-    class="chai-bg-semantic-primary chai-text-white chai-px-16 chai-py-10 chai-rounded-full"
+  <span
+    class="chai-bg-semantic-primary chai-text-white chai-px-12 chai-py-8 chai-rounded-full"
   >
-    Get Started
-  </button>
+    Badge
+  </span>
+  <p class="chai-text-slate-700 chai-font-medium">Hello from pour-chaiwind</p>
 </div>
 ```
 
-### Grid layout
+## React Usage
+
+Since ChaiWind works by scanning the DOM in the browser, initialize it once on the client after your React app mounts.
+
+### React example
+
+```jsx
+import { useEffect } from "react";
+import ChaiWindCSS from "pour-chaiwind";
+
+export default function App() {
+  useEffect(() => {
+    const chaiwind = new ChaiWindCSS();
+    chaiwind.init();
+
+    return () => {
+      chaiwind.destroy();
+    };
+  }, []);
+
+  return (
+    <main className="chai-p-24 chai-bg-slate-100 chai-min-h-screen">
+      <section className="chai-bg-white chai-rounded-3xl chai-shadow-lg chai-p-24 chai-max-w-420 chai-mx-auto">
+        <h1 className="chai-text-3xl chai-font-bold chai-text-slate-800">
+          React + ChaiWindCSS
+        </h1>
+        <p className="chai-text-slate-600 chai-leading-relaxed chai-mt-12">
+          Utility classes are resolved at runtime after the component mounts.
+        </p>
+        <button className="chai-bg-blue-500 chai-text-white chai-px-16 chai-py-10 chai-rounded-full chai-mt-16">
+          Click me
+        </button>
+      </section>
+    </main>
+  );
+}
+```
+
+## Utility Examples
+
+### Spacing
+
+```html
+<div class="chai-p-20"></div>
+<div class="chai-px-16 chai-py-8"></div>
+<div class="chai-mt-24 chai-mx-auto"></div>
+```
+
+### Sizing
+
+```html
+<div class="chai-w-320 chai-h-180"></div>
+<div class="chai-w-full chai-min-h-100"></div>
+```
+
+### Flexbox
+
+```html
+<div class="chai-flex chai-items-center chai-justify-between chai-gap-16">
+  <div>Left</div>
+  <div>Right</div>
+</div>
+```
+
+### Grid
 
 ```html
 <div class="chai-grid chai-gap-20 chai-grid-cols-3">
-  <div class="chai-bg-rose-100 chai-p-20 chai-rounded-lg">One</div>
-  <div class="chai-bg-amber-100 chai-p-20 chai-rounded-lg">Two</div>
-  <div class="chai-bg-emerald-100 chai-p-20 chai-rounded-lg">Three</div>
+  <div class="chai-col-span-2 chai-bg-amber-100 chai-p-16">Wide item</div>
+  <div class="chai-bg-blue-100 chai-p-16">Side item</div>
 </div>
 ```
 
-### Dynamic DOM support
+### Typography
 
-```js
-import ChaiWindCSS from "chaiwind-css";
-
-const chaiwind = new ChaiWindCSS();
-chaiwind.init();
-
-const box = document.createElement("div");
-box.className = "chai-bg-violet-500 chai-text-white chai-p-20 chai-rounded-xl";
-box.textContent = "Inserted after load";
-
-document.body.appendChild(box);
+```html
+<h1 class="chai-text-4xl chai-font-bold chai-leading-tight chai-tracking-tight">
+  ChaiWindCSS
+</h1>
+<p class="chai-text-slate-600 chai-leading-relaxed">
+  Runtime utility styling in the browser.
+</p>
 ```
 
-The observer will detect the new node and apply styles automatically.
+### Colors
 
-## API
-
-### `new ChaiWindCSS(options?)`
-
-Creates a new engine instance.
-
-Supported option:
-
-- `prefix`: custom class prefix. Default is `"chai-"`
-
-Example:
-
-```js
-import ChaiWindCSS from "chaiwind-css";
-
-const chaiwind = new ChaiWindCSS({
-  prefix: "brew-",
-});
-
-chaiwind.init();
+```html
+<div class="chai-bg-blue-500 chai-text-white chai-p-20">Primary</div>
+<div class="chai-bg-emerald-100 chai-text-emerald-700 chai-p-20">Success</div>
+<div class="chai-border-rose-300 chai-border-w-2 chai-border-solid chai-p-20">
+  Border
+</div>
+<div class="chai-bg-semantic-danger chai-text-white chai-p-20">Danger</div>
 ```
 
-### `chaiwind.init()`
+## Supported Utility Families
 
-Scans the DOM, resolves matching classes, applies inline styles, and starts the observer.
-
-### `chaiwind.destroy()`
-
-Disconnects the observer and stops future automatic processing.
-
-### `pour()`
-
-Convenience helper that creates a new instance and calls `init()`.
-
-## Utility Coverage
-
-ChaiWindCSS currently includes these utility groups:
+Current coverage includes:
 
 - Background utilities
 - Text color and typography utilities
-- Border color, radius, width, and style utilities
-- Flexbox and grid utilities
-- Width, height, min/max size utilities
+- Border radius, width, color, and style utilities
+- Flexbox utilities
+- Grid utilities
 - Spacing utilities
-- Positioning utilities
+- Width and height utilities
+- Position utilities
 - Opacity, blur, shadow, and transition utilities
-- Overflow, cursor, pointer-events, and selection utilities
+- Overflow and interaction utilities
 
-## Dynamic Utilities
+## Dynamic Utility Families
 
-The project supports value-based classes through dynamic prefixes.
+ChaiWind supports dynamic prefixes for:
 
-Examples:
+- `chai-p-*`, `chai-px-*`, `chai-py-*`, `chai-pt-*`, `chai-pr-*`, `chai-pb-*`, `chai-pl-*`
+- `chai-m-*`, `chai-mx-*`, `chai-my-*`, `chai-mt-*`, `chai-mr-*`, `chai-mb-*`, `chai-ml-*`
+- `chai-gap-*`, `chai-gap-x-*`, `chai-gap-y-*`
+- `chai-w-*`, `chai-min-w-*`, `chai-max-w-*`
+- `chai-h-*`, `chai-min-h-*`, `chai-max-h-*`
+- `chai-top-*`, `chai-right-*`, `chai-bottom-*`, `chai-left-*`
+- `chai-inset-*`, `chai-inset-x-*`, `chai-inset-y-*`
+- `chai-rounded-*`
+- `chai-border-w-*`, `chai-border-t-*`, `chai-border-r-*`, `chai-border-b-*`, `chai-border-l-*`
+- `chai-flex-*`, `chai-basis-*`, `chai-grow-*`, `chai-shrink-*`, `chai-order-*`
+- `chai-grid-cols-*`, `chai-grid-rows-*`, `chai-col-span-*`, `chai-row-span-*`
+- `chai-text-size-*`, `chai-leading-*`, `chai-tracking-*`, `chai-font-w-*`
+- `chai-opacity-*`, `chai-z-*`, `chai-shadow-blur-*`
+- `chai-duration-*`, `chai-delay-*`
 
-```html
-<div class="chai-p-24"></div>
-<div class="chai-px-16 chai-py-8"></div>
-<div class="chai-w-320 chai-h-180"></div>
-<div class="chai-top-0 chai-right-16"></div>
-<div class="chai-grid-cols-4"></div>
-<div class="chai-col-span-2"></div>
-<div class="chai-duration-300 chai-delay-150"></div>
-```
+## Color Palette
 
-Supported dynamic categories include:
+Built-in palette support includes:
 
-- Padding and margin
-- Width, height, min-width, max-width, min-height, max-height
-- Gap, row-gap, column-gap
-- Position values such as `top`, `right`, `bottom`, `left`, `inset`
-- Border widths and border radius
-- Flex values such as `grow`, `shrink`, `basis`, `order`
-- Grid track and span utilities
-- Font size, line height, letter spacing, font weight
-- Opacity, z-index, blur, transition duration, transition delay
+- base colors: `white`, `black`, `transparent`, `current`
+- neutrals: `slate`, `gray`, `zinc`
+- warm colors: `red`, `orange`, `amber`, `yellow`, `lime`
+- cool colors: `green`, `emerald`, `teal`, `cyan`, `sky`, `blue`, `indigo`
+- accent colors: `violet`, `purple`, `fuchsia`, `pink`, `rose`
+- semantic tokens: `semantic-primary`, `semantic-secondary`, `semantic-success`, `semantic-warning`, `semantic-danger`, `semantic-info`
 
-## Colors and Palette
-
-ChaiWindCSS supports:
-
-- flat colors like `white`, `black`, `transparent`, `current`
-- shade-based palettes like `blue-500`, `slate-700`, `rose-300`
-- semantic tokens like `semantic-primary`, `semantic-success`, `semantic-danger`
-
-Examples:
+Example:
 
 ```html
-<div class="chai-bg-blue-500 chai-text-white"></div>
+<div class="chai-bg-blue-500"></div>
 <div class="chai-text-slate-700"></div>
-<div class="chai-border-emerald-300 chai-border-w-2 chai-border-solid"></div>
-<div class="chai-bg-semantic-primary chai-text-white"></div>
+<div class="chai-border-emerald-300"></div>
+<div class="chai-bg-semantic-primary"></div>
 ```
-
-Available palette families include:
-
-- `slate`, `gray`, `zinc`
-- `red`, `orange`, `amber`, `yellow`, `lime`
-- `green`, `emerald`, `teal`
-- `cyan`, `sky`, `blue`, `indigo`
-- `violet`, `purple`, `fuchsia`, `pink`, `rose`
-- `semantic`
-
-Most palette families support shades from `50` to `950`.
 
 ## Notes
 
-- Classes are converted into inline styles at runtime.
-- Processed ChaiWindCSS classes are removed after resolution.
-- Unknown prefixed classes log a warning in the console.
-- Static utilities and dynamic utilities can be mixed freely.
-- Best suited for demos, prototypes, learning projects, and lightweight apps that want utility-first styling without a build pipeline.
-
-## Project Structure
-
-```text
-src/
-  config/
-    dynamic.js
-    palette.js
-    styles.js
-  core/
-    engine.js
-    observer.js
-    processor.js
-    resolver.js
-  utils/
-    colorResolver.js
-  index.js
-```
-
-## Development Example
-
-```bash
-npm install
-```
-
-Then create a simple `index.html`:
-
-```html
-<h1 class="chai-text-red-300 chai-text-4xl chai-font-bold">
-  Hello ChaiWindCSS
-</h1>
-<script type="module" src="./src/index.js"></script>
-```
+- ChaiWindCSS is a runtime engine, not a build-time compiler
+- It applies styles as inline CSS
+- It removes processed `chai-` classes after applying styles
+- Unknown prefixed classes log warnings in the console
+- It is especially useful for experiments, prototypes, demos, educational projects, and lightweight apps
 
 ## License
 
