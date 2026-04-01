@@ -1,4 +1,4 @@
-import ChaiWindCSS from "./src/engine.js";
+import ChaiWindCSS from "./core/engine.js";
 
 const instance = new ChaiWindCSS();
 
