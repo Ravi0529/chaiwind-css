@@ -1,6 +1,6 @@
 {
-  "name": "chaiwind-css",
-  "version": "1.0.2",
+  "name": "pour-chaiwind",
+  "version": "1.0.0",
   "description": "Brew your UI styles instantly with utility classes, no build step needed.",
   "main": "src/index.js",
   "scripts": {
@@ -15,6 +15,9 @@
     "tailwind",
     "utility-css",
     "chaiwind"
+  ],
+  "files": [
+    "src"
   ],
   "author": "Ravi Mistry",
   "license": "MIT",
