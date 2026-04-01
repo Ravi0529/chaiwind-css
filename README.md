@@ -141,19 +141,11 @@ Since ChaiWind works by scanning the DOM in the browser, initialize it once on t
 ### React example
 
 ```jsx
-import { useEffect } from "react";
-import ChaiWindCSS from "pour-chaiwind";
+import { pour } from "pour-chaiwind";
+
+pour();
 
 export default function App() {
-  useEffect(() => {
-    const chaiwind = new ChaiWindCSS();
-    chaiwind.init();
-
-    return () => {
-      chaiwind.destroy();
-    };
-  }, []);
-
   return (
     <main className="chai-p-24 chai-bg-slate-100 chai-min-h-screen">
       <section className="chai-bg-white chai-rounded-3xl chai-shadow-lg chai-p-24 chai-max-w-420 chai-mx-auto">
@@ -282,15 +274,3 @@ Example:
 <div class="chai-border-emerald-300"></div>
 <div class="chai-bg-semantic-primary"></div>
 ```
-
-## Notes
-
-- ChaiWindCSS is a runtime engine, not a build-time compiler
-- It applies styles as inline CSS
-- It removes processed `chai-` classes after applying styles
-- Unknown prefixed classes log warnings in the console
-- It is especially useful for experiments, prototypes, demos, educational projects, and lightweight apps
-
-## License
-
-MIT
