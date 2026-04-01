@@ -2,35 +2,37 @@ import { processElement } from "./processor.js";
 import { setupObserver } from "./observer.js";
 
 export default class ChaiWindCSS {
-    constructor() {
+    constructor(options = {}) {
         this.cache = new Map();
-        this.prefix = "chai-";
+        this.prefix = options.prefix || "chai-";
+        this.observer = null;
+        this.initialized = false;
     }
 
     init() {
+        if (this.initialized) {
+            return;
+        }
+
         const startTime = performance.now();
         let parsedCount = 0;
 
-        if (document.body) {
-            document.body.style.visibility = "hidden";
-        }
-
-        const elements = document.querySelectorAll(`[class*="${this.prefix}"]`);
-
-        elements.forEach((el) => {
-            parsedCount += processElement(el, this.cache, this.prefix);
+        document.querySelectorAll(`[class*="${this.prefix}"]`).forEach((element) => {
+            parsedCount += processElement(element, this.cache, this.prefix);
         });
 
-        const endTime = performance.now();
+        this.observer = setupObserver(this.prefix, this.cache);
+        this.initialized = true;
 
+        const endTime = performance.now();
         console.log(
             `ChaiwindCSS initialized in ${(endTime - startTime).toFixed(2)}ms. Processed ${parsedCount} classes.`
         );
+    }
 
-        if (document.body) {
-            document.body.style.visibility = "visible";
-        }
-
-        setupObserver(this.prefix, this.cache);
+    destroy() {
+        this.observer?.disconnect();
+        this.observer = null;
+        this.initialized = false;
     }
 }
