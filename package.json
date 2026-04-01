@@ -1,6 +1,6 @@
 {
   "name": "pour-chaiwind",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Pour your UI styles instantly with utility classes, no build step needed.",
   "main": "src/index.js",
   "scripts": {
@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/Ravi0529/chaiwind-css/issues"
   },
-  "homepage": "https://github.com/Ravi0529/chaiwind-css#readme",
+  "homepage": "https://chaiwind-css.vercel.app/index.html",
   "devDependencies": {
     "esbuild": "^0.27.4"
   }
