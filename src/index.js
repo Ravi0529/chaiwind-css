@@ -1,10 +1,13 @@
 import ChaiWindCSS from "./core/engine.js";
 
-const instance = new ChaiWindCSS();
+if (typeof window !== "undefined") {
+    window.Chaiwind = ChaiWindCSS;
 
-document.addEventListener("DOMContentLoaded", () => {
-    instance.init();
-})
+    document.addEventListener("DOMContentLoaded", () => {
+        const engine = new ChaiWindCSS();
+        engine.init();
+    });
+}
 
 export function pour() {
     const engine = new ChaiWindCSS();
