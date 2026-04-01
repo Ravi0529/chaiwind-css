@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pour-Chaiwind Playground</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="site-shell topbar-inner">
+            <a class="brand-mark" href="./documentation.html">
+                <span class="brand-mark-badge">C</span>
+                <span>Pour-Chaiwind</span>
+            </a>
+            <nav class="topbar-nav">
+                <a class="nav-chip" href="./documentation.html">Documentation</a>
+                <a class="nav-chip is-active" href="./playground.html">Playground</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-shell playground-wrap">
+        <section class="section-head">
+            <div>
+                <div class="eyebrow">Live code lab</div>
+                <h1 class="section-title">Test classes and <span>preview instantly</span></h1>
+                <p class="section-copy">
+                    Write your markup on the left, then watch the preview update on the right using the local
+                    <code>../dist/chaiwind.min.js</code> bundle.
+                </p>
+            </div>
+        </section>
+
+        <section class="playground-grid">
+            <article class="playground-panel is-editor">
+                <div class="playground-toolbar">
+                    <div>
+                        <p class="mini-label">Markup editor</p>
+                        <h2 style="margin: 0;">HTML playground</h2>
+                    </div>
+                    <div class="toolbar-actions">
+                        <button class="ghost-button" id="reset-playground" type="button">Reset</button>
+                        <button class="button" id="run-playground" type="button">Run Preview</button>
+                    </div>
+                </div>
+                <label class="mini-label" for="page-title">Preview title</label>
+                <input class="playground-input" id="page-title" type="text" value="Pour-Chaiwind Playground Preview">
+                <div style="height: 16px;"></div>
+                <label class="mini-label" for="playground-markup">HTML</label>
+                <textarea class="playground-textarea" id="playground-markup" spellcheck="false">&lt;main class="chai-p-24 chai-bg-slate-100 chai-min-h-screen"&gt;
+  &lt;section class="chai-bg-white chai-rounded-3xl chai-shadow-lg chai-p-24 chai-max-w-520 chai-mx-auto"&gt;
+    &lt;div class="chai-flex chai-items-center chai-justify-between chai-gap-16 chai-mb-20"&gt;
+      &lt;span class="chai-bg-orange chai-text-white chai-px-14 chai-py-8 chai-rounded-full chai-font-bold"&gt;
+        chai demo
+      &lt;/span&gt;
+      &lt;span class="chai-text-slate-600 chai-font-medium"&gt;
+        Pour-Chaiwind
+      &lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;h1 class="chai-text-4xl chai-font-black chai-text-slate-800 chai-leading-tight"&gt;
+      Brew utility styling fast
+    &lt;/h1&gt;
+
+    &lt;p class="chai-text-slate-600 chai-leading-relaxed chai-mt-12"&gt;
+      Edit this block to test spacing, colors, flex layouts, sizing, shadows, and more.
+    &lt;/p&gt;
+
+    &lt;div class="chai-flex chai-gap-12 chai-mt-20 chai-flex-wrap"&gt;
+      &lt;button class="chai-bg-blue-500 chai-text-white chai-px-16 chai-py-10 chai-rounded-full"&gt;
+        Primary
+      &lt;/button&gt;
+      &lt;button class="chai-bg-emerald-500 chai-text-white chai-px-16 chai-py-10 chai-rounded-full"&gt;
+        Success
+      &lt;/button&gt;
+      &lt;button class="chai-bg-rose-500 chai-text-white chai-px-16 chai-py-10 chai-rounded-full"&gt;
+        Danger
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/main&gt;</textarea>
+            </article>
+
+            <article class="playground-panel">
+                <div class="playground-toolbar">
+                    <div>
+                        <p class="mini-label">Live output</p>
+                        <h2 style="margin: 0;">Preview panel</h2>
+                    </div>
+                    <div class="toolbar-actions">
+                        <button class="ghost-button" id="copy-markup" type="button">Copy Code</button>
+                    </div>
+                </div>
+                <iframe class="playground-preview-frame" id="playground-frame" title="Pour-Chaiwind preview"></iframe>
+            </article>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="site-shell footer-card">
+            <strong>Tip:</strong>
+            <p class="muted">Try classes like <code>chai-grid</code>, <code>chai-gap-20</code>,
+                <code>chai-bg-semantic-primary</code>, and <code>chai-px-16</code> to explore the utility surface.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const defaultMarkup = document.getElementById("playground-markup").value;
+        const markupField = document.getElementById("playground-markup");
+        const titleField = document.getElementById("page-title");
+        const frame = document.getElementById("playground-frame");
+        const runButton = document.getElementById("run-playground");
+        const resetButton = document.getElementById("reset-playground");
+        const copyButton = document.getElementById("copy-markup");
+
+        function renderPreview() {
+            const title = titleField.value.trim() || "Pour-Chaiwind Preview";
+            const markup = markupField.value;
+
+            frame.srcdoc = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${escapeHtml(title)}</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(180deg, #fff7ef 0%, #f7e8d7 100%);
+            color: #17110f;
+        }
+    </style>
+</head>
+<body>
+${markup}
+<script src="../dist/chaiwind.min.js"><\/script>
+</body>
+</html>`;
+        }
+
+        function escapeHtml(value) {
+            return value
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;");
+        }
+
+        runButton.addEventListener("click", renderPreview);
+
+        resetButton.addEventListener("click", () => {
+            markupField.value = defaultMarkup;
+            titleField.value = "Pour-Chaiwind Playground Preview";
+            renderPreview();
+        });
+
+        copyButton.addEventListener("click", async () => {
+            await navigator.clipboard.writeText(markupField.value);
+            copyButton.textContent = "Copied";
+            window.setTimeout(() => {
+                copyButton.textContent = "Copy Code";
+            }, 1400);
+        });
+
+        markupField.addEventListener("input", () => {
+            window.clearTimeout(markupField._previewTimeout);
+            markupField._previewTimeout = window.setTimeout(renderPreview, 260);
+        });
+
+        titleField.addEventListener("input", () => {
+            window.clearTimeout(titleField._previewTimeout);
+            titleField._previewTimeout = window.setTimeout(renderPreview, 260);
+        });
+
+        renderPreview();
+    </script>
+</body>
+
+</html>

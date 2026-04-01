@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pour-Chaiwind Docs</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="site-shell topbar-inner">
+            <a class="brand-mark" href="./documentation.html">
+                <span class="brand-mark-badge">C</span>
+                <span>Pour-Chaiwind</span>
+            </a>
+            <nav class="topbar-nav">
+                <a class="nav-chip is-active" href="./documentation.html">Documentation</a>
+                <a class="nav-chip" href="./playground.html">Playground</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-shell">
+        <section class="hero">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <div class="eyebrow">Chai utility styling</div>
+                    <h1 class="hero-title">Brew utility CSS with a <span>chai-colored workflow</span>.</h1>
+                    <p class="hero-text">
+                        Pour-Chaiwind lets you write utility classes like <code>chai-p-20</code>,
+                        <code>chai-bg-blue-500</code>, and <code>chai-flex</code> in HTML, JSX, or simple browser pages.
+                        Use it as a runtime script, or import <code>{ pour }</code> in JavaScript and JSX projects.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button" href="./playground.html">Open Playground</a>
+                        <a class="ghost-button" href="#install">Read Setup Guide</a>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat">
+                            <strong>Static</strong>
+                            <span class="muted">Layout, typography, effects, borders, display, and more</span>
+                        </div>
+                        <div class="stat">
+                            <strong>Dynamic</strong>
+                            <span class="muted">Padding, sizing, gaps, grid tracks, opacity, timing, and
+                                positioning</span>
+                        </div>
+                        <div class="stat">
+                            <strong>Palette</strong>
+                            <span class="muted">Shades, semantic tokens, and chai-friendly utility color classes</span>
+                        </div>
+                    </div>
+                </div>
+                <aside class="hero-side">
+                    <p class="mini-label">Quick example</p>
+                    <pre><code>&lt;section class="chai-bg-white chai-rounded-3xl chai-shadow-lg chai-p-24"&gt;
+  &lt;h1 class="chai-text-4xl chai-font-bold chai-text-slate-800"&gt;
+    Hello Chaiwind
+  &lt;/h1&gt;
+  &lt;p class="chai-text-slate-600 chai-leading-relaxed chai-mt-12"&gt;
+    Brew utility styles with zero CSS files.
+  &lt;/p&gt;
+  &lt;button class="chai-bg-semantic-primary chai-text-white chai-px-16 chai-py-10 chai-rounded-full"&gt;
+    Try it
+  &lt;/button&gt;
+&lt;/section&gt;</code></pre>
+                    <div class="pill-row">
+                        <span class="pill">Runtime ready</span>
+                        <span class="pill">JSX friendly</span>
+                        <span class="pill">CDN friendly</span>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="section" id="install">
+            <div class="section-head">
+                <div>
+                    <h2 class="section-title">Install and <span>start pouring</span></h2>
+                    <p class="section-copy">Choose the setup that matches how you want to ship your UI.</p>
+                </div>
+            </div>
+            <div class="grid-3">
+                <article class="feature-card">
+                    <div class="feature-icon">1</div>
+                    <h3>Install from npm</h3>
+                    <pre class="code-block"><code>npm install pour-chaiwind</code></pre>
+                    <p class="muted">Best for JavaScript apps, JSX projects, and bundler-based setups.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">2</div>
+                    <h3>Use the CDN script</h3>
+                    <pre
+                        class="code-block"><code>&lt;script src="https://cdn.jsdelivr.net/npm/pour-chaiwind@latest/dist/chaiwind.min.js"&gt;&lt;/script&gt;</code></pre>
+                    <p class="muted">Best for quick browser demos, sandboxes, and static HTML pages.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">3</div>
+                    <h3>Import in JavaScript or JSX</h3>
+                    <pre class="code-block"><code>import { pour } from "pour-chaiwind";
+
+pour();</code></pre>
+                    <p class="muted">If your project already runs JavaScript, this is the smallest setup path.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="doc-grid">
+                <article class="doc-card">
+                    <p class="mini-label">CDN usage</p>
+                    <h3>Use Pour-Chaiwind in a plain HTML file</h3>
+                    <pre class="code-block"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Pour-Chaiwind Demo&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class="chai-bg-blue-500 chai-text-white chai-p-20 chai-rounded-xl"&gt;
+      CDN test
+    &lt;/div&gt;
+
+    &lt;script src="https://cdn.jsdelivr.net/npm/pour-chaiwind@latest/dist/chaiwind.min.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </article>
+                <article class="doc-card">
+                    <p class="mini-label">JSX usage</p>
+                    <h3>Use it in React or JSX without extra ceremony</h3>
+                    <pre class="code-block"><code>import { pour } from "pour-chaiwind";
+
+pour();
+
+export default function App() {
+  return (
+    &lt;main className="chai-p-24 chai-bg-slate-100 chai-min-h-screen"&gt;
+      &lt;section className="chai-bg-white chai-rounded-3xl chai-shadow-lg chai-p-24 chai-max-w-420 chai-mx-auto"&gt;
+        &lt;h1 className="chai-text-3xl chai-font-bold chai-text-slate-800"&gt;
+          React + Pour-Chaiwind
+        &lt;/h1&gt;
+        &lt;p className="chai-text-slate-600 chai-leading-relaxed chai-mt-12"&gt;
+          Utility classes are resolved at runtime.
+        &lt;/p&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+  );
+}</code></pre>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-head">
+                <div>
+                    <h2 class="section-title">What it <span>gives you</span></h2>
+                    <p class="section-copy">The package ships with both static utilities and value-based dynamic
+                        utilities.</p>
+                </div>
+            </div>
+            <div class="grid-3">
+                <article class="feature-card">
+                    <div class="feature-icon">A</div>
+                    <h3>Static utility groups</h3>
+                    <ul class="doc-list">
+                        <li>backgrounds</li>
+                        <li>typography</li>
+                        <li>borders</li>
+                        <li>display and positioning</li>
+                        <li>overflow and interaction</li>
+                        <li>effects and transitions</li>
+                    </ul>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">B</div>
+                    <h3>Dynamic utility groups</h3>
+                    <ul class="doc-list">
+                        <li><code>chai-p-*</code>, <code>chai-m-*</code>, <code>chai-gap-*</code></li>
+                        <li><code>chai-w-*</code>, <code>chai-h-*</code>, min/max sizing</li>
+                        <li><code>chai-top-*</code>, <code>chai-inset-*</code></li>
+                        <li><code>chai-grid-cols-*</code>, <code>chai-col-span-*</code></li>
+                        <li><code>chai-opacity-*</code>, <code>chai-duration-*</code></li>
+                    </ul>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">C</div>
+                    <h3>Palette utilities</h3>
+                    <ul class="doc-list">
+                        <li><code>chai-bg-blue-500</code></li>
+                        <li><code>chai-text-slate-700</code></li>
+                        <li><code>chai-border-emerald-300</code></li>
+                        <li><code>chai-bg-semantic-primary</code></li>
+                        <li><code>chai-bg-semantic-danger</code></li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-head">
+                <div>
+                    <h2 class="section-title">Copy-paste <span>examples</span></h2>
+                    <p class="section-copy">These are good starter blocks for users who want to test quickly.</p>
+                </div>
+            </div>
+            <div class="split-code">
+                <article class="card">
+                    <p class="mini-label">Card</p>
+                    <pre class="code-block"><code>&lt;section class="chai-bg-white chai-rounded-3xl chai-shadow-lg chai-p-24"&gt;
+  &lt;h2 class="chai-text-3xl chai-font-bold chai-text-slate-800"&gt;
+    Chai card
+  &lt;/h2&gt;
+  &lt;p class="chai-text-slate-600 chai-leading-relaxed chai-mt-12"&gt;
+    A simple card using utility classes.
+  &lt;/p&gt;
+&lt;/section&gt;</code></pre>
+                </article>
+                <article class="card">
+                    <p class="mini-label">Flex row</p>
+                    <pre class="code-block"><code>&lt;div class="chai-flex chai-items-center chai-justify-between chai-gap-16 chai-p-16 chai-bg-slate-100 chai-rounded-xl"&gt;
+  &lt;span class="chai-font-semibold"&gt;Pour-Chaiwind&lt;/span&gt;
+  &lt;button class="chai-bg-orange chai-text-white chai-px-16 chai-py-10 chai-rounded-full"&gt;
+    Brew
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="doc-grid">
+                <article class="doc-card">
+                    <p class="mini-label">Why developers like it</p>
+                    <h3>Simple mental model</h3>
+                    <ul class="check-list">
+                        <li>write classes in HTML or JSX</li>
+                        <li>load the package once</li>
+                        <li>get styles without separate utility CSS files</li>
+                        <li>mix color, spacing, sizing, and layout in one place</li>
+                    </ul>
+                </article>
+                <article class="doc-card">
+                    <p class="mini-label">Next step</p>
+                    <h3>Try the live playground</h3>
+                    <p class="muted">
+                        Open the playground to paste markup, preview live output, and test the current utility
+                        surface without editing your app code.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button" href="./playground.html">Launch Playground</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="site-shell footer-card">
+            <strong>Pour-Chaiwind</strong>
+            <p class="muted">A chai-toned utility CSS experience for quick UI building in HTML and JSX.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
